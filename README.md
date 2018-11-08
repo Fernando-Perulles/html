@@ -1,2 +1,2 @@
 # HTML
-Repositorio para páginas HTML básicas.
+This repository contains basic HTML files.
