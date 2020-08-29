@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Validador cantidades</title>
+<script type="text/javascript">
+
+	function validarNumero() {
+		var cantidad;
+		var extencionCantidad;
+		var contieneDecimal;
+		
+		if(document.getElementById("txtCantidad").value != "") {
+			cantidad = document.getElementById("txtCantidad").value;
+		
+			if(validaFloat(cantidad)) {
+			
+				extencionCantidad = cantidad.length;
+				contieneDecimal = cantidad.indexOf(".");
+					
+				if(contieneDecimal > 0) {
+					var enteros = cantidad.substr(0, contieneDecimal);
+					var decimales = cantidad.substr(contieneDecimal + 1);
+					alert("Enteros : " + enteros +  " Decimales : " + decimales);
+					
+					validaEnteros(enteros);
+					for (var i = 0; i < cantidad.length; i++) {
+					
+						encuentraNumero(cantidad.substr(i, 1));
+					}
+					/*
+					for (var i = 0; i < enteros.length; i++) {
+						encuentraNumero(i);
+					}
+					*/
+				}
+				else if (contieneDecimal <= 0) {
+					alert("No contiene parte decimal");
+					for (var i = 0; i < cantidad.length; i++) {
+						encuentraNumero(cantidad.substr(i, 1));
+					}
+				}
+			}
+		}
+	}
+
+	function encuentraNumero(i) {
+		alert(i);
+		var digitos = new Array();
+		
+		digitos[0] = "Cero";
+		digitos[1] = "Uno";
+		digitos[2] = "Dos";
+		digitos[3] = "Tres";
+		digitos[4] = "Cuatro";
+		digitos[5] = "Cinco";
+		digitos[6] = "Seis";
+		digitos[7] = "Siete";
+		digitos[8] = "Ocho";
+		digitos[9] = "Nueve";
+			
+		alert(digitos[i]);
+	}
+	
+	function validaEnteros(enteros) {
+		var metrica = ["unidades","decenas","centenas","unidades de millar"];
+				
+		var cantidadPosiciones = enteros.length;
+			alert("El numero de posiciones es de : " + cantidadPosiciones);
+		
+		if(cantidadPosiciones === 1) {
+			alert("la cantidad esta en:" + metrica[0]);
+		}
+		else if(cantidadPosiciones === 2) {
+			alert("la cantidad esta en: " + metrica[1]);
+		}
+		else if(cantidadPosiciones === 3) {
+			alert("la cantidad esta en: " + metrica[2]);
+		}
+		else if(cantidadPosiciones === 4) {
+			alert("la cantidad esta en: " + metrica[3]);
+		}
+	}
+	
+	function validaFloat(cantidad)	{
+		var v_bool_valida = false;
+		if (!/^([0-9])*[.]?[0-9]*$/.test(cantidad)) 
+		{
+			alert("El valor " + cantidad + " no es un número");
+			limpiarDatos();
+		} else {
+			v_bool_valida = true;
+			//alert("Es un numero valido");
+		}
+		return v_bool_valida;
+	}
+	
+	function limpiarDatos()	{
+		document.getElementById("txtCantidad").value = "";
+	}
+
+</script>
+</head>
+<body onLoad = "limpiarDatos();" >
+<table>
+  <tr>
+    <td>Captura la cantidad</td>
+    <td><input type = "text" name = "InCantidadIngresada" id="txtCantidad"></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><button name = "BtValidar" onClick = "validarNumero();">Validar Cantidad</button></td>
+  </tr>
+   <tr>
+    <td></td>
+    <td><button name = "BtLimpiar" onClick = "limpiarDatos();">Limpiar Campo</button></td>
+  </tr>
+</table>
+</body>
+</html>
